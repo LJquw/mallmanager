@@ -1,11 +1,11 @@
 <template>
   <div class="login-wrap">
-    <el-form class="login-form" label-position="top" label-width="80px" :model="formdata">
+    <el-form class="login-form" :rules="loginFormRules" label-position="top" label-width="80px" :model="formdata">
       <h2>用户登录</h2>
-      <el-form-item label="用户名">
+      <el-form-item label="用户名" prop="username"><!-- rules和prop是数据验证的 rules放所有规则 -->
         <el-input placeholder="请输入用户名" v-model="formdata.username"></el-input>
       </el-form-item>
-      <el-form-item label="密码">
+      <el-form-item label="密码" prop="password">
         <el-input v-model="formdata.password" placeholder="请输入密码" show-password></el-input>
       </el-form-item>
       <el-button class="login-btn" type="primary" @click.prevent="handleLogin">登录</el-button>
@@ -18,9 +18,23 @@ export default {
   name: "Login",
   data() {
     return {
+      // 这是登录表单的数据绑定对象 存储着要绑定的数据 用于数据验证 发送请求等
       formdata:{
-        name:'',
+        username:'',
         password:''
+      },
+      // 这是表单的验证规则对象
+      loginFormRules: {
+        // 验证用户名是否合法 都是element ui里面的规则
+        username: [
+          { required: true, message: '请输入登录名称', trigger: 'blur' }, /* 鼠标失焦触发验证 */
+          { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+        ],
+        // 验证密码是否合法
+        password: [
+          { required: true, message: '请输入登录密码', trigger: 'blur' },
+          { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
+        ]
       }
     }
   },
