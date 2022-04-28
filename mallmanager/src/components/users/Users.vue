@@ -1,11 +1,7 @@
 <template>
   <el-card class="box-card">
     <!-- 面包屑 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item>首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <my-bread level1="用户管理" level2="用户列表"></my-bread>
 
     <!-- 搜索 -->
     <el-row class="searchRow">
@@ -238,7 +234,7 @@ export default {
     // 获取用户列表
     async getUserList(){
       // 需要授权的 API ，必须在请求头中使用 `Authorization` 字段提供 `token` 令牌
-      this.$http.defaults.headers.common['Authorization'] = sessionStorage.getItem('token');
+      // this.$http.defaults.headers.common['Authorization'] = sessionStorage.getItem('token');
       const res = await this.$http.get(`users?query=${this.query}&pagenum=${this.pagenum}&pagesize=${this.pagesize}`)
       const {meta:{status, msg}, data:{users, total}} = res.data
       if(status === 200){
