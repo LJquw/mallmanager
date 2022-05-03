@@ -19,7 +19,7 @@
     </el-row>
 
     <!-- 表格 -->
-    <el-table :data="userList" style="width: 100%">
+    <el-table :data="userList" height="350" style="width: 100%">
       <!-- 跟menu一样 把要展示的数据存储到table自带的属性data里面 下面再用prop取对应的数据 和v-model双向绑定 -->
       <el-table-column type="index" label="#"></el-table-column> <!-- column索引列 只要加上type="index" -->
       <el-table-column label="姓名" prop="username" width="70px"></el-table-column>
